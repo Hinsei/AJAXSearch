@@ -20,8 +20,12 @@ function autocomplete(event) {
 
   if (input.value.length > min_chars) {
     //abort pending requests
+    //ensure that our XHR object is not working on any pending request before we tell it to do new work
     window.globalXHR.abort()
 
+    // Callback to be applied once the XMLHttpRequest() internal state has been changed after
+    // sending a request
+    // We check to see whether the request is done and that the return status of the request is ok
     window.globalXHR.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {
 
@@ -42,6 +46,10 @@ function autocomplete(event) {
       }
     }
 
+    // authentication is required whenever our client wishes to make a request to our server
+    // this is to prevent csrf attacks on our servers
+    // more info can be found at the link below
+    // https://www.checkmarx.com/2016/01/22/ultimate-guide-understanding-preventing-csrf/
     var auth_token = document.querySelector("[name='csrf-token']").content
     window.globalXHR.open("POST", "/search?query=" + input.value, true)
     //allow js to make request to rails server
