@@ -1,0 +1,10 @@
+<div id="home">
+  <h2>Search For Cities Using AJAX</h2>
+  <div id="search-div">
+    <%= form_tag search_path do %>
+      <%= label_tag "search" %>
+      <%= text_field_tag "search", nil, list: "list" %>
+      <datalist id="list"></datalist>
+    <% end %>
+  </div>
+</div>
