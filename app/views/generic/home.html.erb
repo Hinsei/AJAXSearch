@@ -3,7 +3,6 @@
   <div id="search-div">
     <%= form_tag search_path, id: "city-search" do %>
       <%= label_tag "search" %>
-      <%= hidden_field_tag :authenticity_token, value: form_authenticity_token %>
       <%= text_field_tag "query", nil, list: "list" %>
       <datalist id="list"></datalist>
     <% end %>
