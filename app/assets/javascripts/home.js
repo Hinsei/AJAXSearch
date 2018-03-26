@@ -1,4 +1,4 @@
-var city_input = document.getElementById("search")
+var city_input = document.getElementById("query")
 
 if (city_input){
   city_input.addEventListener("keyup", function(event){
@@ -28,7 +28,7 @@ function autocomplete(event) {
     // We check to see whether the request is done and that the return status of the request is ok
     window.globalXHR.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {
-
+        
         //convert json response to an object
         var response = JSON.parse(this.responseText)
 
@@ -53,6 +53,7 @@ function autocomplete(event) {
     var auth_token = document.querySelector("[name='csrf-token']").content
     window.globalXHR.open("POST", "/search?query=" + input.value, true)
     //allow js to make request to rails server
+    window.globalXHR.setRequestHeader("Accept", "application/json");
     window.globalXHR.setRequestHeader("X-CSRF-TOKEN", auth_token)
     window.globalXHR.send()
   }
