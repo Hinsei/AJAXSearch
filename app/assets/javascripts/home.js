@@ -28,8 +28,7 @@ function autocomplete(event) {
     // We check to see whether the request is done and that the return status of the request is ok
     window.globalXHR.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {
-        console.log('hi')
-
+        
         //convert json response to an object
         var response = JSON.parse(this.responseText)
 
